@@ -14,8 +14,6 @@ function App() {
     {id: v1(), title: "Rest API", isDone: false},
   ])
   
-  // console.log(tasks)
-  
   function removeTask(id: string) {
     let filteredTasks = tasks.filter(t => t.id !== id);
     setTasks(filteredTasks);
@@ -28,13 +26,8 @@ function App() {
   }
   
   function changeStatus(taskId: string, isDone: boolean) {
-    let task = tasks.find(t => t.id === taskId);
-    // ищем элемент по taskId
-    if (task) {
-      task.isDone = isDone
-      // поменяли значение isDone в найденом элементе
-    }
-    // для отрисовки нового массива
+    let task = tasks.find(t => t.id === taskId)
+    if (task) task.isDone = isDone
     setTasks([...tasks])
   }
   
@@ -52,6 +45,7 @@ function App() {
     tasksForTodoList = tasks.filter(t => t.isDone === false)
   }
   
+  
   return (
     <div className="App">
       <TodoList
@@ -60,7 +54,7 @@ function App() {
         removeTask={removeTask}
         changeFilter={changeFilter}
         addTask={addTask}
-        changeTaskStatus={changeStatus}
+        changeStatus={changeStatus}
         filter={filter}
       />
     </div>

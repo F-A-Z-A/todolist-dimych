@@ -7,17 +7,17 @@
   margin-right: 50px;
 }
 
+
 .error {
-  border: 2px solid red;
+  border: 1px solid red;
 }
 
-.error-massage {
-  color: red;
-  font-weight: bold;
+.error-message {
+  color: red
 }
 
 .active-filter {
-  background-color: #2bcecd;
+  background-color: #55f1ef;
 }
 
 .is-done {
