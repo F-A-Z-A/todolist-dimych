@@ -18,6 +18,7 @@ export type TasksObjType = {
 }
 
 function App() {
+  // function for tasks:
   function removeTask(id: string, todolistId: string) {
     let tasks = tasksObj[todolistId]
     tasksObj[todolistId] = tasks.filter(t => t.id !== id);
@@ -50,6 +51,7 @@ function App() {
     }
   }
   
+  // function for todolist:
   function changeFilter(value: FilterValuesType, todoListId: string) {
     let todolist = todolists.find(tl => tl.id === todoListId)
     if (todolist) {
