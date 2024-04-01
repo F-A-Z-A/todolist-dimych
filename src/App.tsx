@@ -18,6 +18,7 @@ export type TasksObjType = {
 }
 
 function App() {
+  
   // function for tasks:
   function removeTask(id: string, todolistId: string) {
     let tasks = tasksObj[todolistId]
@@ -131,13 +132,13 @@ function App() {
             todolists.map(tl => {
               let tasksForTodoList = tasksObj[tl.id];
               if (tl.filter === "active") {
-                tasksForTodoList = tasksForTodoList.filter(t => t.isDone === false)
+                tasksForTodoList = tasksForTodoList.filter(t => !t.isDone)
               }
               if (tl.filter === "completed") {
-                tasksForTodoList = tasksForTodoList.filter(t => t.isDone === true)
+                tasksForTodoList = tasksForTodoList.filter(t => t.isDone)
               }
               
-              return <Grid item>
+              return <Grid item key={tl.id}>
                 <Paper style={{padding: "10px"}} elevation={3}>
                   <TodoList
                     key={tl.id}
