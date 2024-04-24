@@ -1,5 +1,5 @@
-import AppWithRedux from "./AppWithRedux";
-import {ReduxStoreProviderDecorator} from "./stories/ReduxStoreProviderDecorator";
+import AppWithRedux from "../AppWithRedux";
+import {ReduxStoreProviderDecorator} from "./decorators/ReduxStoreProviderDecorator";
 
 export default {
   title: "AppWithRedux Component",
