@@ -91,17 +91,15 @@ export const todolistsApi = {
   },
   createTask: (todolistId: string, title: string) => {
     return instance
-      .post<ResponseType>(`todo-lists/${todolistId}/tasks/`, {title})
+      .post<ResponseType<TaskType>>(`todo-lists/${todolistId}/tasks/`, {title})
   },
   deleteTask: (todolistId: string, taskId: string) => {
     console.log("todo: " + todolistId, "task: " + taskId)
     return instance
       .delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
   },
-  updateTaskTitle: (todolistId: string, taskId: string, title: string) => {
+  updateTask: (todolistId: string, taskId: string, model: UpdateTaskType) => {
     return instance
-      .put<UpdateTaskType>(`todo-lists/${todolistId}/tasks/${taskId}`, {
-        title, description: null, status: 0, priority: 0, startDate: null, deadline: null,
-      })
+      .put<UpdateTaskType>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
   }
 }
