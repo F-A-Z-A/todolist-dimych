@@ -1,5 +1,4 @@
 import axios from "axios";
-import {string} from "prop-types";
 
 const settings = {
   withCredentials: true,
@@ -19,40 +18,39 @@ export type TodolistType = {
   addedDate: string
   order: number
 }
-// type _CreateTodolistResponseType = {
-//   resultCode: number
-//   messages: string[],
-//   data: {
-//     item: TodolistType
-//   }
-// }
-// type _DeleteTodolistResponseType = {
-//   resultCode: number
-//   messages: string[]
-//   data: {}
-// }
-// type _UpdateTodolistResponseType = {
-//   resultCode: number
-//   messages: string[]
-//   data: {}
-// }
 type ResponseType<D = {}> = {
   resultCode: number
   messages: string[]
   data: D
 }
+
+export enum TaskStatuses {
+  New = 0,
+  InProgress = 1,
+  Completed = 2,
+  Draft = 3
+}
+
+export enum TaskPriorities {
+  Low = 0,
+  Middle = 1,
+  Hi = 2,
+  Urgently = 3,
+  Later = 4
+}
+
 export type TaskType = {
   description: string
   title: string
-  status: number
-  priority: number
+  status: TaskStatuses
+  priority: TaskPriorities
   startDate: string
   deadline: string
   id: string
+  todolistId: string
   order: number
   addedDate: string
 }
-
 type UpdateTaskType = {
   title: string
   description: string
@@ -61,7 +59,6 @@ type UpdateTaskType = {
   startDate: string
   deadline: string
 }
-
 type GetTasksResponseType = {
   error: string | null
   totalCount: number
