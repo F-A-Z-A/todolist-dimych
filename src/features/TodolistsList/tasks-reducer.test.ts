@@ -3,11 +3,10 @@ import {
   updateTaskAC,
   removeTaskAC,
   setTasksAC,
-  tasksReducer
-} from '../state/tasks-reducer';
-import {TasksStateType} from '../App';
-import {addTodolistAC, removeTodolistAC, setTodolistAC} from '../state/todolists-reducer';
-import {TaskPriorities, TaskStatuses} from "../api/todolists-api";
+  tasksReducer, TasksStateType
+} from './tasks-reducer';
+import {addTodolistAC, removeTodolistAC, setTodolistAC} from './todolists-reducer';
+import {TaskPriorities, TaskStatuses} from "../../api/todolists-api";
 import {v1} from "uuid";
 
 let startState: TasksStateType = {};
@@ -114,7 +113,7 @@ test.skip('propertry with todolistId should be deleted', () => {
   expect(keys.length).toBe(1);
   expect(endState["todolistId2"]).not.toBeDefined();
 });
-test.skip('empty arrays should be added when we set todolists', () => {
+test.skip('empty arrays should be added when we set TodolistsList', () => {
   const action = setTodolistAC([
     {id: "1", title: "What to learn", addedDate: "", order: 0},
     {id: "2", title: "What to buy", addedDate: "", order: 0}
