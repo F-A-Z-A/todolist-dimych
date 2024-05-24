@@ -2,6 +2,7 @@ import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelTyp
 import {Dispatch} from 'redux'
 import {AppActionsType, AppRootStateType} from '../../app/store'
 import {setAppErrorAC, setAppStatusAC} from "../../app/app-reducer";
+import {handleSeverAppError, handleSeverNetworkError} from "../../utils/error-utils";
 
 const initialState: TasksStateType = {}
 
@@ -68,13 +69,11 @@ export const addTaskTC = (title: string, todolistId: string) => (dispatch: Dispa
         dispatch(addTaskAC(res.data.data.item))
         dispatch(setAppStatusAC("succeeded"))
       } else {
-        if (res.data.messages.length) {
-          dispatch(setAppErrorAC(res.data.messages[0]))
-        } else {
-          dispatch(setAppErrorAC("some error occurred"))
-        }
-        dispatch(setAppStatusAC("failed"))
+        handleSeverAppError(res.data, dispatch)
       }
+    })
+    .catch((error) => {
+      handleSeverNetworkError(error, dispatch)
     })
 }
 export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelType, todolistId: string) =>
@@ -98,7 +97,16 @@ export const updateTaskTC = (taskId: string, domainModel: UpdateDomainTaskModelT
     }
     
     todolistsAPI.updateTask(todolistId, taskId, apiModel)
-      .then(res => dispatch(updateTaskAC(taskId, domainModel, todolistId)))
+      .then(res => {
+        if (res.data.resultCode === 0) {
+          dispatch(updateTaskAC(taskId, domainModel, todolistId))
+        } else {
+          handleSeverAppError(res.data, dispatch)
+        }
+      })
+      .catch((error) => {
+        handleSeverNetworkError(error, dispatch)
+      })
   }
 
 // types
